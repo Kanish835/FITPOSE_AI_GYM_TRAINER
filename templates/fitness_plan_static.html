@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Plan - Smart AI Gym Trainer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .plan-card {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .plan-card-header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+        }
+        .plan-card-body {
+            padding: 20px;
+        }
+        .navbar {
+            background-color: #3f51b5;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: white;
+        }
+        .header-section {
+            background-color: #3f51b5;
+            color: white;
+            padding: 50px 0;
+            margin-bottom: 30px;
+        }
+        .goal-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .goal-option:hover {
+            border-color: #3f51b5;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .goal-option.selected {
+            border-color: #3f51b5;
+            background-color: #f0f2ff;
+        }
+        .goal-option i {
+            font-size: 2rem;
+            color: #3f51b5;
+            margin-bottom: 15px;
+        }
+        .form-check-input:checked {
+            background-color: #3f51b5;
+            border-color: #3f51b5;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Smart AI Gym Trainer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/exercise">Exercise Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/BMI.html">BMI Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/meal-planner">Meal Planner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/help.html">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-section">
+        <div class="container">
+            <h1>Create Your Fitness Plan</h1>
+            <p class="lead">Customize a workout plan tailored to your goals and preferences</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <form id="fitness-plan-form">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="plan-card">
+                        <div class="plan-card-header">
+                            Step 1: Select Your Primary Goal
+                        </div>
+                        <div class="plan-card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="goal-option text-center selected">
+                                        <i class="bi bi-lightning"></i>
+                                        <h5>Lose Weight</h5>
+                                        <p>Focus on calorie burning and cardio</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="goal-option text-center">
+                                        <i class="bi bi-trophy"></i>
+                                        <h5>Build Muscle</h5>
+                                        <p>Focus on strength and hypertrophy</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="goal-option text-center">
+                                        <i class="bi bi-heart"></i>
+                                        <h5>Improve Health</h5>
+                                        <p>Focus on fitness and well-being</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plan-card">
+                        <div class="plan-card-header">
+                            Step 2: Choose Your Experience Level
+                        </div>
+                        <div class="plan-card-body">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="experienceLevel" id="beginner" checked>
+                                    <label class="form-check-label" for="beginner">
+                                        <strong>Beginner</strong> - New to working out or returning after a long break
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="experienceLevel" id="intermediate">
+                                    <label class="form-check-label" for="intermediate">
+                                        <strong>Intermediate</strong> - Working out regularly for at least 6 months
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="experienceLevel" id="advanced">
+                                    <label class="form-check-label" for="advanced">
+                                        <strong>Advanced</strong> - Consistent training for 2+ years with good form
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plan-card">
+                        <div class="plan-card-header">
+                            Step 3: Schedule & Availability
+                        </div>
+                        <div class="plan-card-body">
+                            <div class="mb-3">
+                                <label for="daysPerWeek" class="form-label">How many days per week can you work out?</label>
+                                <select class="form-select" id="daysPerWeek">
+                                    <option value="2">2 days</option>
+                                    <option value="3" selected>3 days</option>
+                                    <option value="4">4 days</option>
+                                    <option value="5">5 days</option>
+                                    <option value="6">6 days</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="timePerSession" class="form-label">How much time do you have per session?</label>
+                                <select class="form-select" id="timePerSession">
+                                    <option value="30">About 30 minutes</option>
+                                    <option value="45" selected>About 45 minutes</option>
+                                    <option value="60">About 60 minutes</option>
+                                    <option value="90">More than 60 minutes</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Preferred workout days:</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="monday" checked>
+                                            <label class="form-check-label" for="monday">Monday</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="tuesday">
+                                            <label class="form-check-label" for="tuesday">Tuesday</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="wednesday" checked>
+                                            <label class="form-check-label" for="wednesday">Wednesday</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="thursday">
+                                            <label class="form-check-label" for="thursday">Thursday</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="friday" checked>
+                                            <label class="form-check-label" for="friday">Friday</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="saturday">
+                                            <label class="form-check-label" for="saturday">Saturday</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plan-card">
+                        <div class="plan-card-header">
+                            Step 4: Equipment & Preferences
+                        </div>
+                        <div class="plan-card-body">
+                            <div class="mb-3">
+                                <label class="form-label">What equipment do you have access to?</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="bodyweight" checked>
+                                            <label class="form-check-label" for="bodyweight">Bodyweight only</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dumbbells" checked>
+                                            <label class="form-check-label" for="dumbbells">Dumbbells</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="barbells">
+                                            <label class="form-check-label" for="barbells">Barbells</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="machines">
+                                            <label class="form-check-label" for="machines">Weight Machines</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="cardio" checked>
+                                            <label class="form-check-label" for="cardio">Cardio Equipment</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="gym">
+                                            <label class="form-check-label" for="gym">Full Gym Access</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="focusAreas" class="form-label">Areas you'd like to focus on:</label>
+                                <select class="form-select" id="focusAreas" multiple size="4">
+                                    <option value="chest" selected>Chest</option>
+                                    <option value="back">Back</option>
+                                    <option value="legs" selected>Legs</option>
+                                    <option value="arms">Arms</option>
+                                    <option value="shoulders">Shoulders</option>
+                                    <option value="core" selected>Core</option>
+                                    <option value="cardio">Cardio Endurance</option>
+                                </select>
+                                <small class="form-text text-muted">Hold Ctrl (or Cmd on Mac) to select multiple areas</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">Generate My Fitness Plan</button>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="plan-card">
+                        <div class="plan-card-header">
+                            About Our Fitness Plans
+                        </div>
+                        <div class="plan-card-body">
+                            <p>Our AI-powered fitness plans are customized to your specific goals, experience level, and available equipment.</p>
+                            <ul>
+                                <li>Personalized workout routines</li>
+                                <li>Adaptable to your schedule</li>
+                                <li>Progressive overload principles</li>
+                                <li>AI form tracking integration</li>
+                                <li>Performance tracking</li>
+                            </ul>
+                            <p>Your plan will include exercises that our AI can track to ensure proper form and maximize results.</p>
+                        </div>
+                    </div>
+
+                    <div class="plan-card">
+                        <div class="plan-card-header">
+                            Why Use AI Exercise Tracking?
+                        </div>
+                        <div class="plan-card-body">
+                            <div class="text-center mb-3">
+                                <i class="bi bi-camera-video" style="font-size: 3rem; color: #3f51b5;"></i>
+                            </div>
+                            <p>Our Smart AI Gym Trainer tracks your exercise form in real-time, counting reps and providing feedback to ensure:</p>
+                            <ul>
+                                <li>Proper technique</li>
+                                <li>Reduced injury risk</li>
+                                <li>Maximum effectiveness</li>
+                                <li>Consistent progress</li>
+                            </ul>
+                            <div class="text-center mt-3">
+                                <a href="/exercise" class="btn btn-outline-primary">Try Exercise Tracker</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Smart AI Gym Trainer</h5>
+                    <p>Your personal AI-powered fitness companion</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 Smart AI Gym Trainer. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle goal option selection
+            const goalOptions = document.querySelectorAll('.goal-option');
+            goalOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    goalOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Handle form submission
+            document.getElementById('fitness-plan-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // In a real app, we'd collect form data and send to backend
+                // For this demo, we'll redirect to the personalized plan page
+                window.location.href = '/personalized_plan.php';
+            });
+        });
+    </script>
+</body>
+
+</html>

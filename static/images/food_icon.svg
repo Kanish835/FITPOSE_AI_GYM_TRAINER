@@ -1,0 +1,12 @@
+<!-- Food Tracking Icon SVG -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="100%" height="100%" fill="#34495e"/>
+  <circle cx="256" cy="256" r="160" fill="#ecf0f1"/>
+  <path d="M192 144a16 16 0 00-16 16v64c0 44.2 35.8 80 80 80s80-35.8 80-80v-64a16 16 0 00-32 0v64c0 26.5-21.5 48-48 48s-48-21.5-48-48v-64a16 16 0 00-16-16z" fill="#3498db"/>
+  <rect x="192" y="336" width="128" height="32" rx="16" fill="#e74c3c"/>
+  <circle cx="176" cy="192" r="16" fill="#f1c40f"/>
+  <circle cx="336" cy="192" r="16" fill="#f1c40f"/>
+  <circle cx="208" cy="240" r="16" fill="#2ecc71"/>
+  <circle cx="304" cy="240" r="16" fill="#2ecc71"/>
+  <circle cx="256" cy="288" r="16" fill="#9b59b6"/>
+</svg>

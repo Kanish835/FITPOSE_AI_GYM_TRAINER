@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Composition Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            padding-left: 20px; /* Add space from the left edge */
+        }
+
+        .home-btn {
+            background-color: white;
+            color: #4CAF50;
+            padding: 10px 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .home-btn:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-gap: 20px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .details {
+            padding: 20px;
+            height: 100%;
+            font-size: 0.9rem; /* Reduced font size for the entire section */
+        }
+
+        .details h2 {
+            font-size: 1.5rem; /* Adjusted size for the food name */
+            color: #4CAF50;
+        }
+
+        .details .food-item,
+        .details .nutrition {
+            font-size: 0.9rem; /* Reduced size for items and labels */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 10px; /* Reduced padding */
+            border-radius: 5px;
+            margin-bottom: 10px; /* Reduced margin between items */
+        }
+
+        .details label,
+        .details input {
+            font-size: 0.8rem; /* Adjusted size for labels and input fields */
+            margin: 8px 0; /* Reduced spacing */
+        }
+
+        .details input[type="number"] {
+            padding: 8px; /* Reduced padding */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-direction: column; /* stack chart and summary vertically */
+            justify-content: flex-start;
+            align-items: center; /* center the inner content */
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            margin-top: 20px; /* reduced space above the chart */
+            padding: 0 10px; /* small horizontal padding so inner max-width aligns visually */
+        }
+
+        .chart-container canvas {
+            width: 100%; /* let canvas take full available width up to max-width */
+            max-width: 900px; /* constrain maximum width so layout remains neat on large screens */
+            height: auto;
+            display: block;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <header>
+        <h1>Food Composition Calculator</h1>
+        <a href="http://localhost/Fitnessgym/HOME.html" class="home-btn">Home</a>
+
+    </header>
+
+    <div class="container">
+        <!-- Left Section -->
+        <div class="details">
+            <div class="food-item">
+                <span>Detected Food Item:</span>
+                <span id="food-item">None</span>
+            </div>
+            <!-- Allow manual selection if detector isn't available -->
+            <label for="food-select" style="display:block; margin-top:8px; font-weight:600;">Or choose food manually:</label>
+            <select id="food-select" style="width:100%; padding:8px; border-radius:6px; margin-bottom:8px;">
+                <option value="auto">-- Use detector (default) --</option>
+            </select>
+            <h2 id="food-name">Food Name</h2>
+            <p id="food-description">Description of the detected food item.</p>
+            <div class="nutrition">
+                <span class="nutrition-label">Carbohydrates (g):</span>
+                <span id="carbs">0g</span>
+            </div>
+            <div class="nutrition">
+                <span class="nutrition-label">Proteins (g):</span>
+                <span id="proteins">0g</span>
+            </div>
+            <div class="nutrition">
+                <span class="nutrition-label">Fats (g):</span>
+                <span id="fats">0g</span>
+            </div>
+            <div class="nutrition">
+                <span class="nutrition-label">Lipids (g):</span>
+                <span id="lipids">0g</span>
+            </div>
+            <div class="nutrition">
+                <span class="nutrition-label">Cholesterol (mg):</span>
+                <span id="cholesterol">0mg</span>
+            </div>
+            <div class="nutrition">
+                <span class="nutrition-label">Calories:</span>
+                <span id="calories">0</span>
+            </div>
+            <label for="weight">Weight (g):</label>
+            <input type="number" id="weight" oninput="updateNutrition()" placeholder="Enter weight in grams">
+
+            <!-- Goal selector to calculate recommended macro distribution -->
+            <label for="goal" style="display:block; margin-top:10px;">Goal:</label>
+            <select id="goal" onchange="updateNutrition()" style="width:100%; padding:8px; border-radius:6px; margin-bottom:8px;">
+                <option value="maintenance">Maintenance (balanced)</option>
+                <option value="weight_loss">Weight loss (higher protein)</option>
+                <option value="muscle_gain">Muscle gain (higher carbs & protein)</option>
+            </select>
+
+            <!-- Manual refresh button to force graph update -->
+            <div style="text-align:left; margin-top:8px;">
+                <button id="update-graph" type="button" style="background:#4CAF50; color:white; padding:8px 14px; border:none; border-radius:6px; cursor:pointer;">Update Graph</button>
+            </div>
+
+            <!-- Macro summary will appear under the chart for a cleaner layout -->
+        </div>
+
+        <!-- Right Section -->
+        <div class="chart-container" style="flex-direction:column; align-items:center;">
+            <canvas id="nutrition-chart"></canvas>
+
+            <!-- Macro summary box (moved below the chart for cleaner layout) -->
+            <div id="macro-summary" style="background:#f9f9f9; color:#333; padding:12px; border-radius:6px; margin-top:18px; width:100%; max-width:900px; box-sizing:border-box; margin-left:auto; margin-right:auto;">
+                <strong>Macro summary</strong>
+                <div id="macro-details" style="margin-top:8px; font-size:0.95rem;">Enter weight and choose a goal to see nutrient distribution.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+                const foodData = {
+    "apple": { name: "Apple", description: "A sweet and crunchy fruit.", carbs: 14, proteins: 0.3, fats: 0.2, lipids: 0.1, cholesterol: 0, calories: 52 },
+    "banana": { name: "Banana", description: "A soft and sweet fruit rich in potassium.", carbs: 23, proteins: 1.1, fats: 0.3, lipids: 0.2, cholesterol: 0, calories: 96 },
+    "chapathi": { name: "Chapathi", description: "A soft flatbread made from wheat flour.", carbs: 20, proteins: 4.2, fats: 1.5, lipids: 1.2, cholesterol: 0, calories: 104 },
+    "chicken gravy": { name: "Chicken Gravy", description: "A savory chicken dish with a rich gravy.", carbs: 3, proteins: 12, fats: 10, lipids: 7, cholesterol: 50, calories: 150 },
+    "fries": { name: "Fries", description: "Crispy fried potato strips.", carbs: 35, proteins: 3.5, fats: 17, lipids: 13, cholesterol: 0, calories: 312 },
+    "idli": { name: "Idli", description: "A steamed rice cake, popular in South India.", carbs: 12, proteins: 2.5, fats: 0.3, lipids: 0.1, cholesterol: 0, calories: 39 },
+    "pizza": { name: "Pizza", description: "A savory dish with various toppings on a dough base.", carbs: 26, proteins: 11, fats: 10, lipids: 5, cholesterol: 20, calories: 285 },
+    "rice": { name: "Rice", description: "A staple grain commonly served with meals.", carbs: 28, proteins: 2.7, fats: 0.3, lipids: 0.2, cholesterol: 0, calories: 130 },
+    "soda": { name: "Soda", description: "A sweetened carbonated beverage.", carbs: 10, proteins: 0, fats: 0, lipids: 0, cholesterol: 0, calories: 40 },
+    "tomato": { name: "Tomato", description: "A juicy fruit often used in salads and sauces.", carbs: 3.9, proteins: 0.9, fats: 0.2, lipids: 0.1, cholesterol: 0, calories: 18 },
+    "vada": { name: "Vada", description: "A fried savory doughnut-shaped snack.", carbs: 18, proteins: 5, fats: 12, lipids: 9, cholesterol: 5, calories: 230 },
+    "burger": { name: "Burger", description: "A sandwich consisting of a beef patty, lettuce, and other toppings.", carbs: 30, proteins: 12, fats: 10, lipids: 8, cholesterol: 40, calories: 295 },
+
+    // Gym-friendly / protein-rich additions
+    "egg": { name: "Egg (whole)", description: "Whole chicken egg - good source of protein.", carbs: 1.1, proteins: 13, fats: 10.6, lipids: 10.6, cholesterol: 373, calories: 155 },
+    "soya chunks": { name: "Soya Chunks (dry)", description: "High-protein textured soy product (dry).", carbs: 25, proteins: 52, fats: 0.5, lipids: 0.5, cholesterol: 0, calories: 345 },
+    "greek yogurt": { name: "Greek Yogurt (plain)", description: "Thick yogurt, high in protein.", carbs: 3.6, proteins: 10, fats: 0.4, lipids: 0.4, cholesterol: 5, calories: 59 },
+    "cottage cheese": { name: "Cottage Cheese", description: "Curd-based fresh cheese; good protein source.", carbs: 3.4, proteins: 11.1, fats: 4.3, lipids: 4.3, cholesterol: 17, calories: 98 },
+    "whey protein": { name: "Whey Protein Powder", description: "Concentrated whey protein powder (approx).", carbs: 8, proteins: 75, fats: 6, lipids: 6, cholesterol: 50, calories: 400 },
+    "chicken breast": { name: "Chicken Breast (cooked)", description: "Lean chicken breast, high in protein.", carbs: 0, proteins: 31, fats: 3.6, lipids: 3.6, cholesterol: 85, calories: 165 },
+    "salmon": { name: "Salmon (Atlantic)", description: "Fatty fish rich in omega-3s and protein.", carbs: 0, proteins: 20, fats: 13, lipids: 13, cholesterol: 55, calories: 208 },
+    "tofu": { name: "Tofu (firm)", description: "Soy-based protein, versatile vegetarian option.", carbs: 1.9, proteins: 8, fats: 4.8, lipids: 4.8, cholesterol: 0, calories: 76 },
+    "soya nuggets": { name: "Soya Nuggets", description: "Another name for textured soy protein.", carbs: 25, proteins: 52, fats: 0.5, lipids: 0.5, cholesterol: 0, calories: 345 },
+    "almonds": { name: "Almonds", description: "Nuts high in healthy fats and protein.", carbs: 22, proteins: 21, fats: 49, lipids: 49, cholesterol: 0, calories: 579 },
+    "peanut butter": { name: "Peanut Butter", description: "Calorie-dense spread with protein & fats.", carbs: 20, proteins: 25, fats: 50, lipids: 50, cholesterol: 0, calories: 588 },
+    "oats": { name: "Oats (dry)", description: "Whole grain high in carbs and fiber.", carbs: 66, proteins: 17, fats: 7, lipids: 7, cholesterol: 0, calories: 389 },
+    "quinoa": { name: "Quinoa (cooked)", description: "Complete plant protein and whole grain.", carbs: 21.3, proteins: 4.4, fats: 1.9, lipids: 1.9, cholesterol: 0, calories: 120 },
+    "lentils": { name: "Lentils (cooked)", description: "Legume high in protein and fiber.", carbs: 20, proteins: 9, fats: 0.4, lipids: 0.4, cholesterol: 0, calories: 116 },
+    "sweet potato": { name: "Sweet Potato", description: "Starchy tuber with complex carbs.", carbs: 20.1, proteins: 1.6, fats: 0.1, lipids: 0.1, cholesterol: 0, calories: 86 }
+};
+
+
+        const ctx = document.getElementById("nutrition-chart").getContext("2d");
+        const chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["Carbohydrates (g)", "Proteins (g)", "Fats (g)", "Lipids (g)", "Cholesterol (mg)", "Calories"],
+                datasets: [{
+                    label: "Nutritional Composition",
+                    data: [0, 0, 0, 0, 0, 0],
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(75, 192, 192, 0.2)",
+                        "rgba(255, 206, 86, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(153, 102, 255, 0.2)",
+                        "rgba(255, 159, 64, 0.2)"
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(255, 206, 86, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(153, 102, 255, 1)",
+                        "rgba(255, 159, 64, 1)"
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        function updateNutrition() {
+            // Determine which food key to use: manual select takes precedence, otherwise detector text
+            const detectedText = document.getElementById("food-item").textContent.trim().toLowerCase();
+            const manualSelect = document.getElementById('food-select').value;
+            let foodKey = null;
+            if (manualSelect && manualSelect !== 'auto') {
+                foodKey = manualSelect;
+            } else if (detectedText && detectedText !== 'none') {
+                foodKey = detectedText;
+            }
+
+            const weight = parseFloat(document.getElementById("weight").value);
+            const goal = document.getElementById('goal').value;
+
+            let usedDefaultFood = false;
+            if ((!foodKey || !foodData[foodKey]) && !isNaN(weight)) {
+                // No detected/manual food but weight provided — fallback to the first available food so chart updates
+                const keys = Object.keys(foodData);
+                if (keys.length > 0) {
+                    foodKey = keys[0];
+                    usedDefaultFood = true;
+                }
+            }
+
+            if (!foodKey || !foodData[foodKey] || isNaN(weight)) {
+                // Clear summary when inputs are incomplete
+                document.getElementById('macro-details').textContent = 'Enter weight and choose a goal to see nutrient distribution.';
+                return;
+            }
+
+            const selectedFoodData = foodData[foodKey];
+
+            const carbs = (selectedFoodData.carbs * weight) / 100;
+            const proteins = (selectedFoodData.proteins * weight) / 100;
+            const fats = (selectedFoodData.fats * weight) / 100;
+            const lipids = (selectedFoodData.lipids * weight) / 100;
+            const cholesterol = (selectedFoodData.cholesterol * weight) / 100;
+            const calories = (selectedFoodData.calories * weight) / 100;
+
+            document.getElementById("food-name").textContent = selectedFoodData.name;
+            document.getElementById("food-description").textContent = selectedFoodData.description;
+            document.getElementById("carbs").textContent = carbs.toFixed(2) + 'g';
+            document.getElementById("proteins").textContent = proteins.toFixed(2) + 'g';
+            document.getElementById("fats").textContent = fats.toFixed(2) + 'g';
+            document.getElementById("lipids").textContent = lipids.toFixed(2) + 'g';
+            document.getElementById("cholesterol").textContent = cholesterol.toFixed(2);
+            document.getElementById("calories").textContent = calories.toFixed(2);
+
+            chart.data.datasets[0].data = [carbs, proteins, fats, lipids, cholesterol, calories];
+            chart.update();
+
+            // Calculate calories from macros
+            const calFromCarbs = carbs * 4;
+            const calFromProtein = proteins * 4;
+            const calFromFats = fats * 9;
+            const macroCalTotal = calFromCarbs + calFromProtein + calFromFats;
+            const totalCalories = (calories > 0) ? calories : macroCalTotal || 1;
+
+            const pctCarbs = (calFromCarbs / totalCalories) * 100;
+            const pctProtein = (calFromProtein / totalCalories) * 100;
+            const pctFats = (calFromFats / totalCalories) * 100;
+
+            // Recommended macro ratios (percent of calories) by goal
+            const recommended = {
+                'weight_loss': { protein: 0.30, carbs: 0.35, fats: 0.35 },
+                'maintenance': { protein: 0.25, carbs: 0.50, fats: 0.25 },
+                'muscle_gain': { protein: 0.30, carbs: 0.50, fats: 0.20 }
+            };
+
+            const rec = recommended[goal] || recommended['maintenance'];
+
+            // Build summary HTML
+            const goalLabel = (goal === 'weight_loss') ? 'Weight loss' : (goal === 'muscle_gain') ? 'Muscle gain' : 'Maintenance';
+            let summary = '';
+            summary += `<div><strong>Selected goal:</strong> ${goalLabel}</div>`;
+            summary += `<div style="margin-top:6px;"><strong>Portion (${weight} g)</strong> — Calories: ${calories.toFixed(0)} kcal</div>`;
+            if (usedDefaultFood) {
+                summary += `<div style="margin-top:6px; color:#666;"><em>Note: no food detected or selected — showing values for <strong>${selectedFoodData.name}</strong> by default.</em></div>`;
+            }
+            summary += `<div style="margin-top:6px;"><strong>Actual macro calories:</strong> Carbs ${calFromCarbs.toFixed(0)} kcal (${pctCarbs.toFixed(0)}%), Protein ${calFromProtein.toFixed(0)} kcal (${pctProtein.toFixed(0)}%), Fats ${calFromFats.toFixed(0)} kcal (${pctFats.toFixed(0)}%)</div>`;
+            summary += `<div style="margin-top:8px;"><strong>Recommended distribution for ${goalLabel}:</strong> Protein ${(rec.protein*100).toFixed(0)}%, Carbs ${(rec.carbs*100).toFixed(0)}%, Fats ${(rec.fats*100).toFixed(0)}%</div>`;
+
+            // Show how this food compares to recommended distribution
+            const diffProtein = pctProtein - (rec.protein*100);
+            const diffCarbs = pctCarbs - (rec.carbs*100);
+            const diffFats = pctFats - (rec.fats*100);
+
+            summary += `<div style="margin-top:8px;"><strong>Comparison:</strong></div>`;
+            summary += `<div>Protein: ${pctProtein.toFixed(0)}% (${diffProtein>=0?'+':''}${diffProtein.toFixed(0)}% vs rec)</div>`;
+            summary += `<div>Carbs: ${pctCarbs.toFixed(0)}% (${diffCarbs>=0?'+':''}${diffCarbs.toFixed(0)}% vs rec)</div>`;
+            summary += `<div>Fats: ${pctFats.toFixed(0)}% (${diffFats>=0?'+':''}${diffFats.toFixed(0)}% vs rec)</div>`;
+
+            // Suggestion text
+            let suggestion = '';
+            if (pctProtein < rec.protein*100) {
+                suggestion += 'This portion is lower in protein than recommended for your goal. Consider adding a protein-rich item (eggs, chicken, Greek yogurt).';
+            } else if (pctProtein > rec.protein*100 + 10) {
+                suggestion += 'High protein for this portion — good if your goal is muscle gain or weight loss.';
+            }
+            if (pctCarbs < rec.carbs*100 - 10) {
+                if (suggestion) suggestion += ' ';
+                suggestion += 'Carbs are lower than the recommendation — add whole grains or fruit for energy if needed.';
+            }
+            if (pctFats > rec.fats*100 + 10) {
+                if (suggestion) suggestion += ' ';
+                suggestion += 'Portion is relatively high in fats; watch portion sizes if aiming for weight loss.';
+            }
+            if (!suggestion) suggestion = 'This food portion is reasonably aligned with the selected goal.';
+
+            summary += `<div style="margin-top:8px; color:#333;"><strong>Suggestion:</strong> ${suggestion}</div>`;
+
+            document.getElementById('macro-details').innerHTML = summary;
+        }
+
+        function fetchDetectedFood() {
+            fetch('/get_object')
+                .then(response => response.json())
+                .then(data => {
+                    const foodItem = data.object_name;
+                    if (foodItem !== document.getElementById("food-item").textContent.trim()) {
+                        document.getElementById("food-item").textContent = foodItem;
+                        updateNutrition();
+                    }
+                })
+                .catch(error => console.error('Error fetching detected food:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setInterval(fetchDetectedFood, 100); // Check for detected food every 0.1 seconds
+
+            document.getElementById("weight").addEventListener("input", updateNutrition);
+            // Ensure goal changes also update the summary
+            document.getElementById("goal").addEventListener("change", updateNutrition);
+
+            // Populate manual food select from foodData
+            const foodSelect = document.getElementById('food-select');
+            Object.keys(foodData).forEach(key => {
+                const opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = foodData[key].name;
+                foodSelect.appendChild(opt);
+            });
+            // When user picks a manual food, update immediately
+            foodSelect.addEventListener('change', () => {
+                // If user selects manual food, update the displayed detected name (for clarity)
+                if (foodSelect.value !== 'auto') {
+                    const sel = foodSelect.value;
+                    if (foodData[sel] && foodData[sel].name) {
+                        document.getElementById('food-item').textContent = foodData[sel].name;
+                    } else {
+                        document.getElementById('food-item').textContent = sel;
+                    }
+                }
+                updateNutrition();
+            });
+
+            // Manual update button (forces graph update)
+            const updateBtn = document.getElementById('update-graph');
+            if (updateBtn) {
+                updateBtn.addEventListener('click', () => {
+                    updateNutrition();
+                    // Small visual feedback: briefly change button text
+                    const orig = updateBtn.textContent;
+                    updateBtn.textContent = 'Updated';
+                    setTimeout(() => updateBtn.textContent = orig, 800);
+                });
+            }
+
+            // Run once to populate if any detected food already available
+            updateNutrition();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+# Main dependencies
+flask==2.3.3
+opencv-python==4.8.0.76
+mediapipe==0.10.7
+numpy==1.25.2
+
+# Database
+mysql-connector-python==8.1.0
+
+# Development and testing
+pytest==7.4.0
+flake8==6.1.0

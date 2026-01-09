@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Smart AI Gym Trainer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .about-card {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .about-card-header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+        }
+        .about-card-body {
+            padding: 20px;
+        }
+        .navbar {
+            background-color: #3f51b5;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: white;
+        }
+        .header-section {
+            background-color: #3f51b5;
+            color: white;
+            padding: 50px 0;
+            margin-bottom: 30px;
+        }
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .team-member h5 {
+            margin-bottom: 5px;
+        }
+        .team-member .role {
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #e8eaf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #3f51b5;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: #3f51b5;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #3f51b5;
+        }
+        .timeline-date {
+            font-weight: bold;
+            color: #3f51b5;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Smart AI Gym Trainer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/exercise">Exercise Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/BMI.html">BMI Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/meal-planner">Meal Planner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/about.php">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/help.html">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-section">
+        <div class="container">
+            <h1>About Smart AI Gym Trainer</h1>
+            <p class="lead">Our mission, vision, and the team behind the innovation</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="about-card">
+                    <div class="about-card-header">
+                        Our Mission
+                    </div>
+                    <div class="about-card-body">
+                        <p class="lead">To make professional-level fitness training accessible to everyone, everywhere, through AI technology.</p>
+                        <p>Smart AI Gym Trainer was founded with a simple but powerful vision: leverage artificial intelligence to provide personalized, accurate, and real-time fitness guidance that adapts to each individual's unique needs and goals.</p>
+                        <p>We believe that proper form and technique are fundamental to effective workouts and injury prevention. Our AI-powered exercise tracking system observes your movements, counts your repetitions, and provides instant feedback—just like a personal trainer, but available 24/7 in the comfort of your own home.</p>
+                        <p>Beyond just exercise tracking, we're building a complete fitness ecosystem that helps you plan workouts, track progress, analyze nutrition, and maintain motivation through achievements and community support.</p>
+                    </div>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-card-header">
+                        Our Technology
+                    </div>
+                    <div class="about-card-body">
+                        <p>Smart AI Gym Trainer uses cutting-edge computer vision and machine learning technologies to deliver a superior fitness experience:</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6 mb-4">
+                                <div class="feature-icon">
+                                    <i class="bi bi-camera-video"></i>
+                                </div>
+                                <h5 class="text-center">Real-time Pose Detection</h5>
+                                <p>Our system uses advanced pose estimation algorithms to track 33 key body points with high accuracy, enabling precise form analysis during exercises.</p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="feature-icon">
+                                    <i class="bi bi-graph-up"></i>
+                                </div>
+                                <h5 class="text-center">Adaptive Learning</h5>
+                                <p>Our AI models continuously improve by learning from thousands of exercise repetitions across different body types and fitness levels.</p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="feature-icon">
+                                    <i class="bi bi-shield-check"></i>
+                                </div>
+                                <h5 class="text-center">Privacy-First Design</h5>
+                                <p>All video processing happens locally on your device. Your workout videos are never stored or transmitted to our servers without your explicit consent.</p>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="feature-icon">
+                                    <i class="bi bi-cpu"></i>
+                                </div>
+                                <h5 class="text-center">Optimized Performance</h5>
+                                <p>Our algorithms are designed to work efficiently on standard webcams and consumer hardware, with no specialized equipment required.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-card-header">
+                        Our Journey
+                    </div>
+                    <div class="about-card-body">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2021</div>
+                                <h5>The Concept</h5>
+                                <p>Smart AI Gym Trainer began as a research project exploring the application of computer vision in fitness. The founding team recognized the potential to democratize access to professional fitness guidance.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2022</div>
+                                <h5>Prototype Development</h5>
+                                <p>The first prototype capable of accurately tracking push-ups and squats was developed, demonstrating the feasibility of real-time form analysis and rep counting.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Early 2023</div>
+                                <h5>Expanding Capabilities</h5>
+                                <p>The system was expanded to support a wider range of exercises including shoulder presses, lateral raises, barbell rows, tricep dips, and dumbbell curls.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Mid 2023</div>
+                                <h5>Comprehensive Fitness Platform</h5>
+                                <p>Integrated the exercise tracking system with nutrition guidance, BMI analytics, personalized workout plans, and progress tracking features to create a complete fitness solution.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">Present</div>
+                                <h5>Continuous Improvement</h5>
+                                <p>We're continuously refining our AI models, expanding our exercise database, and enhancing the user experience based on feedback from our growing community.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="about-card">
+                    <div class="about-card-header">
+                        Meet Our Team
+                    </div>
+                    <div class="about-card-body">
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/150" alt="Team Member">
+                            <h5>Alex Johnson</h5>
+                            <div class="role">Founder & CEO</div>
+                            <p>Former fitness coach with a background in computer science. Alex combined his passions to create technology that makes quality fitness guidance accessible to all.</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/150" alt="Team Member">
+                            <h5>Sarah Chen</h5>
+                            <div class="role">Chief Technology Officer</div>
+                            <p>Computer vision expert with a PhD in AI. Sarah leads our technology development and ensures our pose detection algorithms are accurate and efficient.</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="https://via.placeholder.com/150" alt="Team Member">
+                            <h5>Miguel Rodriguez</h5>
+                            <div class="role">Lead Fitness Advisor</div>
+                            <p>Certified personal trainer with over 15 years of experience. Miguel ensures our exercise guidance follows best practices for effectiveness and safety.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-card-header">
+                        Contact Us
+                    </div>
+                    <div class="about-card-body">
+                        <p>We'd love to hear from you! Whether you have questions, feedback, or partnership opportunities, please don't hesitate to reach out.</p>
+                        <div class="mb-3">
+                            <i class="bi bi-envelope me-2"></i> info@smartgymtrainer.com
+                        </div>
+                        <div class="mb-3">
+                            <i class="bi bi-telephone me-2"></i> (555) 123-4567
+                        </div>
+                        <div class="mb-3">
+                            <i class="bi bi-geo-alt me-2"></i> 123 AI Avenue, Tech City, CA 94043
+                        </div>
+                        <div class="mt-4">
+                            <a href="/contact.php" class="btn btn-primary w-100">Get in Touch</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Smart AI Gym Trainer</h5>
+                    <p>Your personal AI-powered fitness companion</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 Smart AI Gym Trainer. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

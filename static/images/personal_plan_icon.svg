@@ -1,0 +1,13 @@
+<!-- Personalized Plan Icon SVG -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="100%" height="100%" fill="#34495e"/>
+  <rect x="96" y="96" width="320" height="320" rx="16" fill="#ecf0f1"/>
+  <rect x="128" y="160" width="256" height="16" rx="8" fill="#3498db"/>
+  <rect x="128" y="200" width="192" height="16" rx="8" fill="#3498db"/>
+  <rect x="128" y="240" width="256" height="16" rx="8" fill="#3498db"/>
+  <rect x="128" y="280" width="224" height="16" rx="8" fill="#3498db"/>
+  <rect x="128" y="320" width="256" height="16" rx="8" fill="#3498db"/>
+  <rect x="128" y="360" width="192" height="16" rx="8" fill="#3498db"/>
+  <circle cx="368" cy="128" r="24" fill="#e74c3c"/>
+  <path d="M368 112l8 16-8 16-8-16z" fill="#ffffff"/>
+</svg>

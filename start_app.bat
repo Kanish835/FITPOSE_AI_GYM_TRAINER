@@ -1,0 +1,3 @@
+@echo off
+echo Starting Smart AI Gym Trainer...
+python run.py

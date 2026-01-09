@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Smart AI Gym Trainer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .help-card {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .help-card-header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+        }
+        .help-card-body {
+            padding: 20px;
+        }
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+        .faq-question {
+            font-weight: bold;
+            color: #3f51b5;
+        }
+        .navbar {
+            background-color: #3f51b5;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: white;
+        }
+        .header-section {
+            background-color: #3f51b5;
+            color: white;
+            padding: 50px 0;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Smart AI Gym Trainer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/exercise">Exercise Tracker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/BMI.html">BMI Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/meal-planner">Meal Planner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/help.html">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-section">
+        <div class="container">
+            <h1>Help Center</h1>
+            <p class="lead">Find answers to common questions about Smart AI Gym Trainer</p>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="help-card">
+                    <div class="help-card-header">
+                        Frequently Asked Questions
+                    </div>
+                    <div class="help-card-body">
+                        <div class="faq-item">
+                            <div class="faq-question">How does the AI exercise tracker work?</div>
+                            <div class="faq-answer">
+                                Our AI exercise tracker uses computer vision technology to analyze your body position and movements in real-time. It identifies key body points and calculates angles to track proper form and count repetitions accurately.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">What exercises can be tracked?</div>
+                            <div class="faq-answer">
+                                Currently, our system can track push-ups, squats, shoulder-press, lateral-rise, barbell-row, tricep-dips, and alternate dumbbell curls. We're constantly adding new exercises to our tracking capabilities.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">How accurate is the rep counting?</div>
+                            <div class="faq-answer">
+                                The rep counting accuracy is typically above 90% for most exercises when performed in good lighting conditions with a clear view of your body. The system is designed to only count proper form repetitions.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">What are the recommended lighting conditions?</div>
+                            <div class="faq-answer">
+                                For best results, use the tracker in a well-lit room with even lighting. Avoid backlighting (such as standing in front of a window) and ensure your full body is visible to the camera.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">How do I use the meal planner?</div>
+                            <div class="faq-answer">
+                                Our meal planner allows you to input your dietary preferences and fitness goals. It then generates balanced meal plans with calorie counts and nutritional information. You can customize meals and generate shopping lists.
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">Is my data secure?</div>
+                            <div class="faq-answer">
+                                Yes, we take data security seriously. Your workout data and personal information are encrypted and stored securely. We do not share your data with third parties without your explicit consent.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="help-card">
+                    <div class="help-card-header">
+                        Contact Support
+                    </div>
+                    <div class="help-card-body">
+                        <p>Need more help? Contact our support team:</p>
+                        <p><strong>Email:</strong> support@smartgymtrainer.com</p>
+                        <p><strong>Phone:</strong> (555) 123-4567</p>
+                        <p>Available Monday-Friday, 9am-5pm</p>
+                        
+                        <div class="mt-4">
+                            <a href="/contact.php" class="btn btn-primary w-100">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="help-card mt-4">
+                    <div class="help-card-header">
+                        Quick Links
+                    </div>
+                    <div class="help-card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="/guide.html">User Guide</a></li>
+                            <li class="list-group-item"><a href="/exercise">Exercise Tutorials</a></li>
+                            <li class="list-group-item"><a href="/about.php">About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Smart AI Gym Trainer</h5>
+                    <p>Your personal AI-powered fitness companion</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 Smart AI Gym Trainer. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
