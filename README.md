@@ -156,7 +156,3 @@ This script will copy files from the old structure to the new one while preservi
 ⚠️ Note: I won't be uploading the main folder and SQL file required to run the full model here.
 📩 If you're interested in running the complete project, feel free to contact me — I'll provide all the necessary files and step-by-step guidance.
 
-
-**Contact** 
-📧 preetham159@gmail.com
-📧 preethamn2004@gmail.com
